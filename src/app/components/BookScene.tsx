@@ -11,6 +11,10 @@ type FlipState = {
 const TOTAL_PAGES = 10;
 const TOTAL_SPREADS = Math.ceil(TOTAL_PAGES / 2); // 5
 
+// next/image rewrites its src for basePath automatically, but a raw CSS
+// background-image url() does not — so prefix it manually for GitHub Pages.
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const IMAGE_PAGE_INDICES = [3, 5, 7];
 const RIGHT_TEXT_PAGE_INDICES = [1, 9];
 
@@ -1047,7 +1051,7 @@ export default function BookScene() {
             style={{
               position: "absolute",
               inset: 0,
-              backgroundImage: "url('/images/shelf-books.jpg')",
+              backgroundImage: `url('${BASE_PATH}/images/shelf-books.jpg')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               filter: "blur(18px) brightness(.4) saturate(.85)",
